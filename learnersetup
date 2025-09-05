@@ -1,0 +1,30 @@
+import sys
+
+def get_serverless_version() -> int:
+  python_version = sys.version.split()[0]
+  match python_version:
+    case "3.10.12":
+      return 1
+    case "3.11.10":
+      return 2
+    # default to latest version
+    case _:
+      return 2
+
+serverless_version = get_serverless_version()
+print(serverless_version)
+
+requirements = f"/Volumes/prod_ai_dojo/wheelhouse/genai/capstone/{serverless_version}/shim.txt"
+constraints = f"/Volumes/prod_ai_dojo/wheelhouse/genai/capstone/{serverless_version}/constraints.txt"
+pymupdf = f"/Volumes/prod_ai_dojo/wheelhouse/genai/course3/1/pymupdf-1.25.5-cp39-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
+
+%pip install -r $requirements -c $constraints
+%pip install $pymupdf
+dbutils.library.restartPython()
+print("The kernel has been restarted and you can now run the notebook.")
+
+import os
+
+os.environ["ANONYMIZED_TELEMETRY"]="False"
+tiktoken_cache_dir = os.path.abspath("./.setup/tiktoken_cache/")
+os.environ["TIKTOKEN_CACHE_DIR"] = tiktoken_cache_dir
