@@ -1,0 +1,6 @@
+Python – Primary language used throughout the code.
+LangChain-For building the RAG pipeline, retrieval strategies, and evaluation.
+OpenAI LLM API (GPT-4o-mini)-Language model used for generating clinical responses
+text-embedding-3-small-Converts text into vector format
+ChromaDB-Vector database for storing and retrieving embedded medical documents.
+Streamlit-For UI
